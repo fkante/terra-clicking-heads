@@ -9,7 +9,6 @@ const Play = () => {
   const playTime = 15;
 
   const [time, setTime] = useState(playTime);
-  const [gameOver, setGameOver] = useState(false);
   // We use this to track where the target is on the screen
   const [targetPosition, setTargetPosition] = useState({
     top: "15%",
@@ -27,6 +26,17 @@ const Play = () => {
   }, []);
 
   useEffect(() => {
+    const submitScore = async () => {
+      if (connectedWallet && connectedWallet.network.name === "testnet") {
+        setLoading(true);
+        const tx = await execute.setScore(connectedWallet, score);
+        console.log(tx);
+        // Once the transaction is confirmed, we let the user know and navigate to the leaderboard
+        alert("Score submitted!");
+        setLoading(false);
+        window.location.href = "/leaderboard";
+      }
+    };
     if (time === 0) {
       setTargetPosition({ display: "none" });
       // Show alert to let user know it's game over
@@ -35,19 +45,7 @@ const Play = () => {
       );
       submitScore();
     }
-  }, [time]);
-
-  const submitScore = async () => {
-    if (connectedWallet && connectedWallet.network.name === "testnet") {
-      setLoading(true);
-      const tx = await execute.setScore(connectedWallet, score);
-      console.log(tx);
-      // Once the transaction is confirmed, we let the user know and navigate to the leaderboard
-      alert("Score submitted!");
-      setLoading(false);
-      window.location.href = "/leaderboard";
-    }
-  };
+  }, [time, score, connectedWallet]);
 
   const handleClick = () => {
     // OGs will know this :)

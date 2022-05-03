@@ -46,19 +46,12 @@ function App() {
 
       </header>
 
-      <div>
+      {status === WalletStatus.WALLET_NOT_CONNECTED && (
+        <div>
         <img
           src="https://media4.giphy.com/media/721us8U63qA4VgOJ1r/giphy.gif?cid=ecf05e47lsx6se5lelutwf30gfa5tvo8ihk090lz8swlwb3r&rid=giphy.gif&ct=g"
           alt="Demon Slayer gif"
         />
-      </div>
-
-      {status === WalletStatus.WALLET_NOT_CONNECTED && (
-        <div>
-          <img
-            src="https://media.giphy.com/media/B19AYwNXoXtcs/giphy.gif"
-            alt="Goblin gif"
-          />
         </div>
       )}
 
