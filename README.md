@@ -1,4 +1,4 @@
-# buildspace Web3 app on Terra project
+# Web3 app on Terra project
 
 ### **Welcome 👋**
 
